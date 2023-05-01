@@ -16,7 +16,7 @@ df = pd.read_csv('https://raw.githubusercontent.com/seoinhyeok96/BusyPeople/main
 
 df.columns = ['index','count']
 
-dict_0 = dict(zip(df['인덱스'], df['카운트']))
+dict_0 = dict(zip(df['index'], df['count']))
 
 # Create and generate a word cloud image:
 wc = WordCloud(
