@@ -2,6 +2,18 @@ import streamlit as st
 from wordcloud import WordCloud
 import matplotlib.pyplot as plt
 
+DATE_COLUMN = '어간'
+DATA_URL = ('/data/어간데이터.csv')
+
+@st.cache_data
+def load_data():
+    data = pd.read_csv(DATA_URL)
+    return data
+
+data_load_state = st.text('Loading data...')
+df = load_data()
+data_load_state.text("Done! (using st.cache_data)")
+
 # Create some sample text
 dict_0 = df['어간'].apply(lambda x: Counter([i[0] for i in eval(x) if i[1] == 'Noun']))[0]
 for i in df['어간'].apply(lambda x: Counter([i[0] for i in eval(x) if i[1] == 'Noun']))[1:]:
