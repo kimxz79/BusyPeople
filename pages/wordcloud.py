@@ -42,8 +42,7 @@ st.pyplot(fig)
 number = st.slider('Insert a number', min_value=1, step=1)
 bar_df = df.sort_values(by=['count'],ascending=False).reset_index(drop=True).iloc[:number]
 
-st.write(bar_df)
 st.write(alt.Chart(bar_df).mark_bar().encode(
     x=alt.X('index', sort=None),
-    y='count',
+    y='count'
 ))
