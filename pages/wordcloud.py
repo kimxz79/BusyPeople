@@ -38,5 +38,5 @@ plt.show()
 st.pyplot(fig)
 
 number = st.number_input('Insert a number')
-bar_df = df.sort_values('0', ascending=False)[:number]
+bar_df = df.sort_values('0', axis=1, ascending=False)[:number]
 st.bar_chart(bar_df)
