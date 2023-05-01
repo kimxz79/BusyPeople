@@ -26,4 +26,4 @@ fig, ax = plt.subplots(
 plt.imshow(cloud, interpolation='bilinear')
 plt.axis("off")
 plt.show()
-st.pyplot()
+st.pyplot(fig)
