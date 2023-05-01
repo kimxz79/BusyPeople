@@ -1,8 +1,14 @@
-import streamlit as st
+import wget
+
 import pandas as pd
-from wordcloud import WordCloud
 import matplotlib.pyplot as plt
 import koreanize_matplotlib
+
+from wordcloud import WordCloud
+
+import streamlit as st
+
+font_url = ''
 
 df = pd.read_csv('https://raw.githubusercontent.com/seoinhyeok96/BusyPeople/main/data/%EC%96%B4%EA%B0%84.csv')
 
