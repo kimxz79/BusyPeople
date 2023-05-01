@@ -14,7 +14,7 @@ wc = WordCloud(
     # relative_scaling=0.5,
     width=800,
     height=400,
-    font_path='/usr/share/fonts/truetype/nanum/NanumBarunGothic.ttf'
+    font_path='/font/NanumBarunGothic.ttf'
     )
 cloud = wc.generate_from_frequencies(dict(dict_0))
 
