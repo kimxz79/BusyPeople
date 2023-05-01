@@ -8,6 +8,11 @@ DATE_COLUMN = 'date/time'
 DATA_URL = ('https://s3-us-west-2.amazonaws.com/'
             'streamlit-demo-data/uber-raw-data-sep14.csv.gz')
 
+
+df = pd.read_csv('제목+내용.csv')
+
+df['time'] = pd.to_datetime(df['time'])
+
 agree = st.checkbox('밴드')
 agree2 = st.checkbox('식물갤러리')
 
