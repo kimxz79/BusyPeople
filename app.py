@@ -9,7 +9,7 @@ DATA_URL = ('https://s3-us-west-2.amazonaws.com/'
             'streamlit-demo-data/uber-raw-data-sep14.csv.gz')
 
 
-df = pd.read_csv('제목+내용.csv')
+df = pd.read_csv('https://raw.githubusercontent.com/seoinhyeok96/BusyPeople/main/data/%E1%84%90%E1%85%B3%E1%84%85%E1%85%A6%E1%86%AB%E1%84%83%E1%85%B3_%E1%84%8C%E1%85%A6%E1%84%86%E1%85%A9%E1%86%A8%2B%E1%84%82%E1%85%A2%E1%84%8B%E1%85%AD%E1%86%BC.csv')
 
 df['time'] = pd.to_datetime(df['time'])
 
