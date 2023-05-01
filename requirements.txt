@@ -7,4 +7,4 @@ seaborn
 matplotlib
 koreanize-matplotlib
 wordcloud
-fonts-nanum*
+fonts-nanum
