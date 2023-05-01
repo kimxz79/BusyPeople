@@ -40,5 +40,5 @@ plt.show()
 st.pyplot(fig)
 
 number = st.slider('Insert a number', min_value=1, step=1)
-bar_df = df.sort_values(by=['count'],ascending=False).reset_index(drop=True)[:number]
+bar_df = df.sort_values(by=['count'],ascending=False).reset_index(drop=True).iloc[:number]
 st.bar_chart(bar_df)
