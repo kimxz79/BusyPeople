@@ -8,10 +8,10 @@ DATE_COLUMN = 'date/time'
 DATA_URL = ('https://s3-us-west-2.amazonaws.com/'
             'streamlit-demo-data/uber-raw-data-sep14.csv.gz')
 
-if st.button('Say hello'):
-    st.write('안녕하세요 나쁜 사람들 대시보드입니다')
-else:
-    st.write('Goodbye')
+agree = st.checkbox('I agree')
+
+if agree:
+    st.write('Great!')
 
 @st.cache_data
 def load_data(nrows):
