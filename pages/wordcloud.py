@@ -2,17 +2,7 @@ import streamlit as st
 from wordcloud import WordCloud
 import matplotlib.pyplot as plt
 
-DATE_COLUMN = '어간'
-DATA_URL = ('https://raw.githubusercontent.com/seoinhyeok96/BusyPeople/main/data/%EC%96%B4%EA%B0%84.csv')
-
-@st.cache_data
-def load_data():
-    data = pd.read_csv(DATA_URL)
-    return data
-
-data_load_state = st.text('Loading data...')
-df = load_data()
-data_load_state.text("Done! (using st.cache_data)")
+df = pd.read_csv('https://raw.githubusercontent.com/seoinhyeok96/BusyPeople/main/data/%EC%96%B4%EA%B0%84.csv')
 
 dict_0 = dict(zip(df['index'], df['0']))
 
