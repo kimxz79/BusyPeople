@@ -5,6 +5,7 @@ import matplotlib.pyplot as plt
 from collections import Counter
 from wordcloud import WordCloud
 import koreanize_matplotlib
+from sklearn.feature_extraction.text import CountVectorizer, TfidfVectorizer
 
 st.title('한눈에 보는 데이터 프레임')
 agree = st.checkbox('밴드')
@@ -12,7 +13,7 @@ agree2 = st.checkbox('식물갤러리')
 
 df = pd.read_csv('https://raw.githubusercontent.com/seoinhyeok96/BusyPeople/main/data/%E1%84%90%E1%85%B3%E1%84%85%E1%85%A6%E1%86%AB%E1%84%83%E1%85%B3_%E1%84%8C%E1%85%A6%E1%84%86%E1%85%A9%E1%86%A8%2B%E1%84%82%E1%85%A2%E1%84%8B%E1%85%AD%E1%86%BC.csv')
 
-df.columns = ['index','count']
+
 
 
 
