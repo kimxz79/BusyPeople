@@ -40,5 +40,5 @@ plt.show()
 st.pyplot(fig)
 
 number = st.number_input('Insert a number', min_value=1 , step=1)
-bar_df = df[:40]
+bar_df = df.sort_values(by=['count'],ascending=False).reset_index(drop=True)[:number]
 st.bar_chart(bar_df)
