@@ -2,6 +2,7 @@ import streamlit as st
 import pandas as pd
 from wordcloud import WordCloud
 import matplotlib.pyplot as plt
+import koreanize_matplotlib
 
 df = pd.read_csv('https://raw.githubusercontent.com/seoinhyeok96/BusyPeople/main/data/%EC%96%B4%EA%B0%84.csv')
 
@@ -14,7 +15,7 @@ wc = WordCloud(
     # relative_scaling=0.5,
     width=800,
     height=400,
-    font_path='/usr/share/fonts/truetype/nanum/NanumBarunGothic.ttf'
+#     font_path='/usr/share/fonts/truetype/nanum/NanumBarunGothic.ttf'
     )
 cloud = wc.generate_from_frequencies(dict(dict_0))
 
