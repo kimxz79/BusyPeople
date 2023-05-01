@@ -14,7 +14,7 @@ wget.download(font_url)
 
 df = pd.read_csv('https://raw.githubusercontent.com/seoinhyeok96/BusyPeople/main/data/%EC%96%B4%EA%B0%84.csv')
 
-df.columns = ['인덱스','카운트']
+df.columns = ['index','count']
 
 dict_0 = dict(zip(df['인덱스'], df['카운트']))
 
