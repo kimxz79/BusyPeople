@@ -9,9 +9,12 @@ DATA_URL = ('https://s3-us-west-2.amazonaws.com/'
             'streamlit-demo-data/uber-raw-data-sep14.csv.gz')
 
 agree = st.checkbox('밴드')
+agree2 = st.checkbox('밴드')
 
 if agree:
     st.write('Great!')
+if agree2:
+     st.write('식물갤러리')       
 
 @st.cache_data
 def load_data(nrows):
