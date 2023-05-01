@@ -3,7 +3,7 @@ from wordcloud import WordCloud
 import matplotlib.pyplot as plt
 
 DATE_COLUMN = '어간'
-DATA_URL = ('https://raw.githubusercontent.com/seoinhyeok96/BusyPeople/data/어간데이터.csv')
+DATA_URL = ('https://raw.githubusercontent.com/seoinhyeok96/BusyPeople/main/data/%EC%96%B4%EA%B0%84%EB%8D%B0%EC%9D%B4%ED%84%B0.csv')
 
 @st.cache_data
 def load_data():
