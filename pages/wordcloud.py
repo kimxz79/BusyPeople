@@ -14,7 +14,9 @@ wget.download(font_url)
 
 df = pd.read_csv('https://raw.githubusercontent.com/seoinhyeok96/BusyPeople/main/data/%EC%96%B4%EA%B0%84.csv')
 
-dict_0 = dict(zip(df['index'], df['0']))
+df.columns = ['인덱스','카운트']
+
+dict_0 = dict(zip(df['인덱스'], df['카운트']))
 
 # Create and generate a word cloud image:
 wc = WordCloud(
@@ -38,5 +40,5 @@ plt.show()
 st.pyplot(fig)
 
 number = st.number_input('Insert a number', min_value=1 , step=1)
-bar_df = df.sort_values(by='0', axis=1, ascending=False)
+bar_df = df.sort_values(by='카운트', axis=1, ascending=False)
 st.bar_chart(bar_df)
