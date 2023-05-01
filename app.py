@@ -1,6 +1,10 @@
 import streamlit as st
 import pandas as pd
 import numpy as np
+import matplotlib.pyplot as plt
+from collections import Counter
+from wordcloud import WordCloud
+import koreanize_matplotlib
 
 st.title('한눈에 보는 데이터 프레임')
 
@@ -16,11 +20,6 @@ df['time'] = pd.to_datetime(df['time'])
 agree = st.checkbox('밴드')
 agree2 = st.checkbox('식물갤러리')
 
-
-import matplotlib.pyplot as plt
-from collections import Counter
-from wordcloud import WordCloud
-import koreanize_matplotlib
 
 
 def plot_wordcloud(words):
