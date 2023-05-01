@@ -14,10 +14,7 @@ data_load_state = st.text('Loading data...')
 df = load_data()
 data_load_state.text("Done! (using st.cache_data)")
 
-# Create some sample text
-dict_0 = df['어간'].apply(lambda x: Counter([i[0] for i in eval(x) if i[1] == 'Noun']))[0]
-for i in df['어간'].apply(lambda x: Counter([i[0] for i in eval(x) if i[1] == 'Noun']))[1:]:
-    dict_0 = dict_0 + i
+dict_0 = dict(zip(df['index'], df['0']))
 
 # Create and generate a word cloud image:
 wc = WordCloud(
