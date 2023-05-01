@@ -37,4 +37,6 @@ plt.axis("off")
 plt.show()
 st.pyplot(fig)
 
-st.bar_chart(df)
+number = st.number_input('Insert a number')
+bar_df = df.sort_values('0', ascending=False)[:number]
+st.bar_chart(bar_df)
