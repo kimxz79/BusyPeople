@@ -7,19 +7,14 @@ from wordcloud import WordCloud
 import koreanize_matplotlib
 
 st.title('한눈에 보는 데이터 프레임')
-
-DATE_COLUMN = 'date/time'
-DATA_URL = ('https://s3-us-west-2.amazonaws.com/'
-            'streamlit-demo-data/uber-raw-data-sep14.csv.gz')
-
-
-df = pd.read_csv('https://raw.githubusercontent.com/seoinhyeok96/BusyPeople/main/data/%E1%84%90%E1%85%B3%E1%84%85%E1%85%A6%E1%86%AB%E1%84%83%E1%85%B3_%E1%84%8C%E1%85%A6%E1%84%86%E1%85%A9%E1%86%A8%2B%E1%84%82%E1%85%A2%E1%84%8B%E1%85%AD%E1%86%BC.csv')
-
-df['time'] = pd.to_datetime(df['time'])
-
 agree = st.checkbox('밴드')
 agree2 = st.checkbox('식물갤러리')
 
+df = pd.read_csv('https://raw.githubusercontent.com/seoinhyeok96/BusyPeople/main/data/%E1%84%90%E1%85%B3%E1%84%85%E1%85%A6%E1%86%AB%E1%84%83%E1%85%B3_%E1%84%8C%E1%85%A6%E1%84%86%E1%85%A9%E1%86%A8%2B%E1%84%82%E1%85%A2%E1%84%8B%E1%85%AD%E1%86%BC.csv')
+
+
+agree = st.checkbox('밴드')
+agree2 = st.checkbox('식물갤러리')
 
 
 def plot_wordcloud(words):
@@ -64,13 +59,17 @@ def get_tfidf_top_words(df, start_date=None, last_date=None, num_words=10, name=
 get_count_top_words(df, '2023-01-01', '2023-02-01', 50, '밴드')
 
 
-
-
-
 if agree:
     st.write('Great!')
 if agree2:
      st.write('식물갤러리')       
+
+
+
+
+DATE_COLUMN = 'date/time'
+DATA_URL = ('https://s3-us-west-2.amazonaws.com/'
+            'streamlit-demo-data/uber-raw-data-sep14.csv.gz')
 
 @st.cache_data
 def load_data(nrows):
