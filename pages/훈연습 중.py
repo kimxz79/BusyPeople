@@ -1,15 +1,11 @@
-import warnings
-warnings.filterwarnings("ignore", message="PyplotGlobalUseWarning")
 import streamlit as st
 import pandas as pd
 import networkx as nx
 import matplotlib.pyplot as plt
-import ast
 from gensim.models import Word2Vec
-import time
-#리스트로 바꿔주기
+
 def to_list(text):
-    return ast.literal_eval(text)
+    return text.split('|||')
 
 #데이터 전처리
 df = pd.read_csv('https://raw.githubusercontent.com/seoinhyeok96/BusyPeople/main/data/%ED%8A%B8%EB%A0%8C%EB%93%9C_%EC%A0%9C%EB%AA%A9%2B%EB%82%B4%EC%9A%A9.csv')
@@ -28,7 +24,7 @@ def get_words(df, col, keyword):
         return None
 
 def show_modal(df):
-    st.dataframe(df)
+    st.table(df)
 
 def main():
     # 폰트 설정
@@ -66,14 +62,4 @@ def main():
     
             st.success(f"<{keyword}>에 대한 연관어 분석 결과입니다😀")
             plt.axis('off')
-            st.pyplot()
-
-        # 모달에 데이터프레임 보여주기
-        if st.button('분석 결과 데이터 보기'):
-            show_modal(df_data)
-            
-if __name__ == '__main__':
-    main()
-
-
-
+           
