@@ -58,7 +58,6 @@ fig, ax = plt.subplots(
 plt.imshow(wordcloud, interpolation='bilinear')
 plt.axis("off")
 plt.show()
-st.pyplot(fig)
 
 st.bar_chart(barplot)
 
