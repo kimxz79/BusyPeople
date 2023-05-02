@@ -66,8 +66,9 @@ def main():
             st.success(f"<{keyword}>에 대한 연관어 분석 결과입니다😀")
             plt.axis('off')
             st.pyplot()
-            
-            if st.button('분석 결과 데이터 보기'):
+
+            expander = st.expander('분석 결과 데이터 보기')
+            with expander:
                 show_modal(df_data)
             
 if __name__ == '__main__':
