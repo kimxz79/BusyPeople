@@ -6,7 +6,6 @@ from gensim.models import Word2Vec
 
 def to_list(text):
     return ast.literal_eval(text)
-df['title+content'] = df['title+content'].map(to_list)
 
 #데이터 전처리
 df = pd.read_csv('https://raw.githubusercontent.com/seoinhyeok96/BusyPeople/main/data/%ED%8A%B8%EB%A0%8C%EB%93%9C_%EC%A0%9C%EB%AA%A9%2B%EB%82%B4%EC%9A%A9.csv')
