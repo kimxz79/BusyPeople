@@ -61,7 +61,7 @@ data = go.Scatter(
     mode='text',
     text=words,
     marker={'opacity': 0.3},
-    textfont={'size': [i/10 for i in list(dict_0.values())],
+    textfont={'size': [int(i)/10 for i in list(dict_0.values())],
             'color': colors})
 
 layout = go.Layout({'xaxis': {'showgrid': False, 'showticklabels': False, 'zeroline': False},
