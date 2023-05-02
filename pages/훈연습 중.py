@@ -2,13 +2,17 @@ import streamlit as st
 import pandas as pd
 
 def main():
-        st.title('Networkx 그려보자')
-        st.subheader('키워드를 입력해보세요')
-        
-        if st.checkbox('개인정보 동의'):
-                message = st.text_area('키워드를 입력하세요')
-                if st.button('분석하기'):
-                        st.success(message.title())
+    st.title('Networkx 그려보자')
+    st.subheader('키워드를 입력해보세요')
+
+    if st.checkbox('개인정보 동의'):
+        message = st.text_area('키워드를 입력하세요')
+        if st.button('분석하기'):
+            st.success(message.title())
+
+if __name__ == '__main__':
+    main()
+
         
 
 
