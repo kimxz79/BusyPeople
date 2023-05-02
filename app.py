@@ -69,7 +69,7 @@ if __name__ == '__main__':
 
     if data_file is not None:
         # CSV 파일 읽어오기
-        df = pd.read_csv(data_file)
+        df = pd.read_csv('https://github.com/seoinhyeok96/BusyPeople/blob/main/data/%ED%8A%B8%EB%A0%8C%EB%93%9C_%EC%A0%9C%EB%AA%A9%2B%EB%82%B4%EC%9A%A9.csv')
 
         # 필터링 조건 입력
         name = st.text_input("Name (Optional)")
