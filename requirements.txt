@@ -13,3 +13,4 @@ datetime
 scikit-learn
 networkx
 gensim
+streamlit-modal
