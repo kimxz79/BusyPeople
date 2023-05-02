@@ -33,6 +33,8 @@ fig, ax = plt.subplots(
     figsize=(12,12)
 )
 
+#주석
+
 # Display the generated image:
 plt.imshow(cloud, interpolation='bilinear')
 plt.axis("off")
@@ -42,3 +44,4 @@ st.pyplot(fig)
 number = st.slider('Insert a number', min_value=10, step=1)
 bar_df = df.sort_values(by=['count'],ascending=False).reset_index(drop=True).iloc[:number]
 st.bar_chart(bar_df)
+
