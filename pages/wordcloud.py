@@ -53,7 +53,7 @@ import random
 
 words = list(dict_0.keys())
 colors = [plotly.colors.DEFAULT_PLOTLY_COLORS[random.randrange(1, 10)] for i in range(30)]
-weights = [random.randint(15, 35) for i in range(30)]
+weights = list(dict_0.values())
 
 data = go.Scatter(
     x=[random.random() for i in range(30)],
@@ -61,12 +61,11 @@ data = go.Scatter(
     mode='text',
     text=words,
     marker={'opacity': 0.3},
-    textfont={'size': list(dict_0.values()),
-            'color': colors})
+    textfont={'color': colors})
 
-# layout = go.Layout({'xaxis': {'showgrid': False, 'showticklabels': False, 'zeroline': False},
-#                     'yaxis': {'showgrid': False, 'showticklabels': False, 'zeroline': False}})
+layout = go.Layout({'xaxis': {'showgrid': False, 'showticklabels': False, 'zeroline': False},
+                    'yaxis': {'showgrid': False, 'showticklabels': False, 'zeroline': False}})
 
-fig = go.Figure(data=[data])
+fig = go.Figure(data=[data], layout=layout)
 
 fig
