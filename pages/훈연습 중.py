@@ -3,8 +3,9 @@ from streamlit_agraph import agraph, TripleStore
 import wget
 import pandas as pd
 
-font_url = 'https://raw.githubusercontent.com/seoinhyeok96/BusyPeople/main/font/NanumBarunGothic.ttf'
-wget.download(font_url)
+import streamlit as st
+from streamlit_agraph import agraph, TripleStore
+import pandas as pd
 
 # Define the data
 data = [('식물', 'lemon', 8.773420979111814),
@@ -15,11 +16,18 @@ data = [('식물', 'lemon', 8.773420979111814),
         ('식물', '빙고', 7.6275987515220764),
         ('식물', '에스카르고', 7.4945584243029275)]
 
-print(data)
-# ts = TripleStore(font_path='NanumBarunGothic.ttf')
-# for row in data:
-#     ts.add_triple(*row)
+# Create a triple store from the data
+ts = TripleStore()
+for row in data:
+    ts.add_triple(*row)
 
-# # Create the network graph
-# st.title('Network Graph')
-# agraph(ts)
+# Create the network graph
+st.title('Network Graph')
+with open('Font/NanumBarunGothic.ttf', 'rb') as f:
+    font_bytes = f.read()
+graph = agraph(ts, font_bytes=font_bytes)
+st.write(graph)
+
+# Create the network graph
+st.title('Network Graph')
+agraph(ts)
