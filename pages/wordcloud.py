@@ -75,7 +75,6 @@ for i in position_list:
 new_freq_list = []
 for i in freq_list:
     new_freq_list.append(i*100)
-new_freq_list
 
 trace = go.Scatter(x=x, 
                     y=y, 
