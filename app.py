@@ -11,7 +11,7 @@ st.title('한눈에 보는 데이터 프레임')
 agree = st.checkbox('밴드')
 agree2 = st.checkbox('식물갤러리')
 
-df = pd.read_csv('https://raw.githubusercontent.com/seoinhyeok96/BusyPeople/main/data/%ED%8A%B8%EB%A0%8C%EB%93%9C_%EC%A0%9C%EB%AA%A9%2B%EB%82%B4%EC%9A%A9.csv')
+
 
 
 import matplotlib.pyplot as plt
@@ -19,6 +19,8 @@ from collections import Counter
 from wordcloud import WordCloud
 import koreanize_matplotlib
 from sklearn.feature_extraction.text import CountVectorizer, TfidfVectorizer
+
+df = pd.read_csv('https://raw.githubusercontent.com/seoinhyeok96/BusyPeople/main/data/%ED%8A%B8%EB%A0%8C%EB%93%9C_%EC%A0%9C%EB%AA%A9%2B%EB%82%B4%EC%9A%A9.csv')
 
 def plot_wordcloud(words):
     wc = WordCloud(background_color="white", 
