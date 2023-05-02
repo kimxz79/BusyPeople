@@ -23,7 +23,7 @@ for row in data:
 
 # Create the network graph
 st.title('Network Graph')
-with open('Font/NanumBarunGothic.ttf', 'rb') as f:
+with open('BusyPeople/Font/NanumBarunGothic.ttf', 'rb') as f:
     font_bytes = f.read()
 graph = agraph(ts, font_bytes=font_bytes)
 st.write(graph)
