@@ -27,8 +27,8 @@ def get_words(df, col, keyword):
     except:
         return None
 
-# def show_modal(df):
-#     st.table(df)
+def show_modal(df):
+    st.table(df)
 
 def main():
     # 폰트 설정
@@ -66,6 +66,8 @@ def main():
             st.success(f"<{keyword}>에 대한 연관어 분석 결과입니다😀")
             plt.axis('off')
             st.pyplot()
+    if st.button('분석 결과 데이터 보기'):
+        show_modal(df_data)
             
 if __name__ == '__main__':
     main()
