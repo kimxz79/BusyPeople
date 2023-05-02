@@ -81,7 +81,7 @@ trace = go.Scatter(x=x,
                     textfont = dict(size=new_freq_list,
                                     color=color_list),
                     hoverinfo='text',
-                    hovertext=['<b>line plot:</b> <br>1<br>2<br>3', '<b>bar plot:</b> <br>4<br>5<br>6'],
+                    hovertext=['{0}{1}'.format(w, f) for w, f in zip(word_list, freq_list)],
                     mode='text',  
                     text=word_list
                     )
