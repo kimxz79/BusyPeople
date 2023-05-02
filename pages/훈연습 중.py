@@ -1,6 +1,8 @@
 import streamlit as st
 import pandas as pd
 from streamlit_agraph import agraph, TripleStore
+font_url = 'https://raw.githubusercontent.com/seoinhyeok96/BusyPeople/main/font/NanumBarunGothic.ttf'
+wget.download(font_url)
 
 # Define the data
 data = [('식물', 'lemon', 8.773420979111814),
