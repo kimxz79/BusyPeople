@@ -14,3 +14,4 @@ scikit-learn
 networkx
 gensim
 streamlit-modal
+streamlit-extras
