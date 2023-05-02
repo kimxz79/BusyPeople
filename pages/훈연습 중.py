@@ -1,8 +1,12 @@
+import warnings
+warnings.filterwarnings("ignore", message="PyplotGlobalUseWarning")
 import streamlit as st
 import pandas as pd
 import networkx as nx
 import matplotlib.pyplot as plt
+import ast
 from gensim.models import Word2Vec
+import time
 
 def to_list(text):
     return ast.literal_eval(text)
