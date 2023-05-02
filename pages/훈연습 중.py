@@ -5,13 +5,14 @@ def main():
     st.title('Networkx 그려보자')
     st.subheader('키워드를 입력해보세요')
 
-    if st.checkbox('개인정보 동의'):
-        message = st.text_area('키워드를 입력하세요')
-        if st.button('분석하기'):
-            st.success(message.title())
+    message = st.text_area('키워드를 입력하세요')
+    keyword = message
+    if st.button('분석하기'):
+        st.success(f"{keyword}에 대한 연관어 분석 결과입니다")
 
 if __name__ == '__main__':
     main()
+
 
         
 
