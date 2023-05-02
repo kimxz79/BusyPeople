@@ -51,7 +51,7 @@ import plotly.graph_objs as go
 from plotly.offline import plot
 import random
 
-words = dict_0.keys()
+words = list(dict_0.keys())
 colors = [plotly.colors.DEFAULT_PLOTLY_COLORS[random.randrange(1, 10)] for i in range(30)]
 weights = [random.randint(15, 35) for i in range(30)]
 
