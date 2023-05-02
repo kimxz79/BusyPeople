@@ -46,15 +46,14 @@ bar_df = df.sort_values(by=['count'],ascending=False).reset_index(drop=True).ilo
 st.bar_chart(bar_df)
 
 
-words = dir(go)[:30]
-colors = [plotly.colors.DEFAULT_PLOTLY_COLORS[random.randrange(1, 10)] for i in range(30)]
-weights = [random.randint(15, 35) for i in range(30)]
-
-
 import plotly
 import plotly.graph_objs as go
 from plotly.offline import plot
 import random
+
+words = dir(go)[:30]
+colors = [plotly.colors.DEFAULT_PLOTLY_COLORS[random.randrange(1, 10)] for i in range(30)]
+weights = [random.randint(15, 35) for i in range(30)]
 
 data = go.Scatter(x=[random.random() for i in range(30)],
                  y=[random.random() for i in range(30)],
