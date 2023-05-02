@@ -7,13 +7,12 @@ import matplotlib.pyplot as plt
 import ast
 from gensim.models import Word2Vec
 import time
-
-#데이터 전처리
-df = pd.read_csv('https://raw.githubusercontent.com/seoinhyeok96/BusyPeople/main/data/%ED%8A%B8%EB%A0%8C%EB%93%9C_%EC%A0%9C%EB%AA%A9%2B%EB%82%B4%EC%9A%A9.csv')
-
 #리스트로 바꿔주기
 def to_list(text):
     return ast.literal_eval(text)
+
+#데이터 전처리
+df = pd.read_csv('https://raw.githubusercontent.com/seoinhyeok96/BusyPeople/main/data/%ED%8A%B8%EB%A0%8C%EB%93%9C_%EC%A0%9C%EB%AA%A9%2B%EB%82%B4%EC%9A%A9.csv')
 df['title+content'] = df['title+content'].map(to_list)
 
 def get_words(df, col, keyword):
@@ -29,7 +28,7 @@ def get_words(df, col, keyword):
         return None
 
 def show_modal(df):
-    st.write(df)
+    st.dataframe(df)
 
 def main():
     # 폰트 설정
