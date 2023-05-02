@@ -8,7 +8,7 @@ import ast
 from gensim.models import Word2Vec
 
 #데이터 전처리
-df = pd.read_csv('https://github.com/seoinhyeok96/BusyPeople/blob/38ff9ba3ab390d829038ce1243acf906bf07a0e3/data/%ED%8A%B8%EB%A0%8C%EB%93%9C_%EC%A0%9C%EB%AA%A9+%EB%82%B4%EC%9A%A9.csv')
+df = pd.read_csv('https://raw.githubusercontent.com/seoinhyeok96/BusyPeople/main/data/%ED%8A%B8%EB%A0%8C%EB%93%9C_%EC%A0%9C%EB%AA%A9%2B%EB%82%B4%EC%9A%A9.csv')
 
 #리스트로 바꿔주기
 def to_list(text):
