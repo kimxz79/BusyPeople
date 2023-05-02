@@ -13,8 +13,8 @@ df = pd.read_csv('https://raw.githubusercontent.com/seoinhyeok96/BusyPeople/main
 
 #리스트로 바꿔주기
 def to_list(text):
-    df['title+content'] = df['title+content'].map(to_list)
     return ast.literal_eval(text)
+df['title+content'] = df['title+content'].map(to_list)
 
 def get_words(df, col, keyword):
     text_list=[]
