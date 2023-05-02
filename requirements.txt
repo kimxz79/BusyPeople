@@ -9,4 +9,4 @@ matplotlib
 koreanize-matplotlib
 wordcloud
 sklearn
-sklearn.feature_extraction
+
