@@ -1,6 +1,4 @@
 import streamlit as st
-from streamlit_agraph import agraph, TripleStore
-import wget
 import pandas as pd
 
 def main():
