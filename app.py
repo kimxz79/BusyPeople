@@ -52,9 +52,6 @@ def get_count_top_words(df, start_date=None, last_date=None, num_words=10, name=
     plot_wordcloud(count_top_words)
     plot_bar(count_top_words)
 
-# Example usage
-st.set_option('deprecation.showPyplotGlobalUse', False) # to prevent warning
-get_count_top_words(df, '2023-01-01', '2023-02-01', 50, '밴드')
 
 
 
