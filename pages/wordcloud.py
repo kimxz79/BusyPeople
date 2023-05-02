@@ -64,9 +64,9 @@ data = go.Scatter(
     textfont={'size': list(dict_0.values()),
             'color': colors})
 
-layout = go.Layout({'xaxis': {'showgrid': False, 'showticklabels': False, 'zeroline': False},
-                    'yaxis': {'showgrid': False, 'showticklabels': False, 'zeroline': False}})
+# layout = go.Layout({'xaxis': {'showgrid': False, 'showticklabels': False, 'zeroline': False},
+#                     'yaxis': {'showgrid': False, 'showticklabels': False, 'zeroline': False}})
 
-fig = go.Figure(data=[data], layout=layout)
+fig = go.Figure(data=[data])
 
 fig
