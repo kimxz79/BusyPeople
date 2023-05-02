@@ -38,31 +38,31 @@ def main():
             data = get_words(df, 'title+content', keyword)
             df_data = pd.DataFrame(data, columns=["Source", "Target", "Weight"])
 
-        # Define the data
-        data = get_words(df, 'title+content', keyword)
-        df_data = pd.DataFrame(data, columns=["Source", "Target", "Weight"])
+            # Define the data
+            data = get_words(df, 'title+content', keyword)
+            df_data = pd.DataFrame(data, columns=["Source", "Target", "Weight"])
 
-        # Create the network graph
-        G = nx.DiGraph()
-        for row in data:
-            G.add_edge(row[0], row[1], weight=row[2])
+            # Create the network graph
+            G = nx.DiGraph()
+            for row in data:
+                G.add_edge(row[0], row[1], weight=row[2])
 
-        pos = nx.spring_layout(G)
+            pos = nx.spring_layout(G)
 
-        labels = {}
-        for edge in G.edges(data=True):
-            labels[(edge[0], edge[1])] = f"{edge[2]['weight']:.2f}"
+            labels = {}
+            for edge in G.edges(data=True):
+                labels[(edge[0], edge[1])] = f"{edge[2]['weight']:.2f}"
 
-        edge_widths = [data[i][2] for i in range(len(data))]
+            edge_widths = [data[i][2] for i in range(len(data))]
 
-        nx.draw_networkx_edges(G, pos)
-        nx.draw_networkx_nodes(G, pos, node_color='lightblue', node_size=500)
-        nx.draw_networkx_labels(G, pos, font_size=12, font_family='NanumGothic', font_weight='bold')
-        nx.draw_networkx_edge_labels(G, pos, edge_labels=labels, font_size=12, font_family='NanumGothic')
-
-        st.success(f"<{keyword}>에 대한 연관어 분석 결과입니다😀")
-        plt.axis('off')
-        st.pyplot()
+            nx.draw_networkx_edges(G, pos)
+            nx.draw_networkx_nodes(G, pos, node_color='lightblue', node_size=500)
+            nx.draw_networkx_labels(G, pos, font_size=12, font_family='NanumGothic', font_weight='bold')
+            nx.draw_networkx_edge_labels(G, pos, edge_labels=labels, font_size=12, font_family='NanumGothic')
+    
+            st.success(f"<{keyword}>에 대한 연관어 분석 결과입니다😀")
+            plt.axis('off')
+            st.pyplot()
 
         show_data = st.checkbox('분석 결과 데이터 보기')
         
