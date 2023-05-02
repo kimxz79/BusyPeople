@@ -56,8 +56,8 @@ colors = [plotly.colors.DEFAULT_PLOTLY_COLORS[random.randrange(1, 10)] for i in 
 weights = [random.randint(15, 35) for i in range(30)]
 
 data = go.Scatter(
-    x=list(dict_0.values()).max(),
-    y=list(dict_0.values()).max(),
+    x=list(dict_0.values()),
+    y=list(dict_0.values()),
     mode='text',
     text=words,
     marker={'opacity': 0.3},
