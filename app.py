@@ -65,7 +65,7 @@ if __name__ == '__main__':
     st.title("Count Top Words")
 
     # 입력 데이터
-    data_file = st.file_uploader("Upload CSV", type=["csv"])
+    data_file = st.file_uploader("https://github.com/seoinhyeok96/BusyPeople/blob/main/data/%ED%8A%B8%EB%A0%8C%EB%93%9C_%EC%A0%9C%EB%AA%A9%2B%EB%82%B4%EC%9A%A9.csv", type=["csv"])
 
     if data_file is not None:
         # CSV 파일 읽어오기
