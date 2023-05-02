@@ -60,7 +60,6 @@ data = go.Scatter(
     y=[random.random() for i in range(200)],
     mode='text',
     text=words,
-    marker={'opacity': 0.3},
     textfont={
         'size': list(dict_0.values()),
         'color': colors})
