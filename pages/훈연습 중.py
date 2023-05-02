@@ -13,17 +13,20 @@ df = pd.read_csv('https://raw.githubusercontent.com/seoinhyeok96/BusyPeople/main
 
 #리스트로 바꿔주기
 def to_list(text):
+    df['title+content'] = df['title+content'].map(to_list)
     return ast.literal_eval(text)
-df['title+content'] = df['title+content'].map(to_list)
 
 def get_words(df, col, keyword):
     text_list=[]
     for sublist in df[col]:
         text_list.append(sublist)
     model = Word2Vec(text_list, vector_size=100, window=5, min_count=1, workers=4, epochs=100)
-    similar_words = model.wv.most_similar(keyword, topn=10)
-    results = [(keyword, word, score) for word, score in similar_words]
-    return results
+    try:
+        similar_words = model.wv.most_similar(keyword, topn=10)
+        results = [(keyword, word, score) for word, score in similar_words]
+        return results
+    except:
+        return None
 
 def show_modal(df):
     st.write(df)
@@ -39,11 +42,10 @@ def main():
         with st.spinner('분석 중입니다...'):
             # Define the data
             data = get_words(df, 'title+content', keyword)
-            df_data = pd.DataFrame(data, columns=["Source", "Target", "Weight"])
-
-            # Define the data
-            data = get_words(df, 'title+content', keyword)
-            df_data = pd.DataFrame(data, columns=["Source", "Target", "Weight"])
+            if data is None:
+                st.warning('다른 키워드를 입력해주세요. 추천 키워드 : 제라늄, 꽃피우는시간')
+            else:
+                df_data = pd.DataFrame(data, columns=["Source", "Target", "Weight"])
 
             # Create the network graph
             G = nx.DiGraph()
