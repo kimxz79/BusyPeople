@@ -11,7 +11,14 @@ st.title('한눈에 보는 데이터 프레임')
 agree = st.checkbox('밴드')
 agree2 = st.checkbox('식물갤러리')
 
+df = pd.read_csv('https://raw.githubusercontent.com/seoinhyeok96/BusyPeople/main/data/%ED%8A%B8%EB%A0%8C%EB%93%9C_%EC%A0%9C%EB%AA%A9%2B%EB%82%B4%EC%9A%A9.csv')
 
+
+import matplotlib.pyplot as plt
+from collections import Counter
+from wordcloud import WordCloud
+import koreanize_matplotlib
+from sklearn.feature_extraction.text import CountVectorizer, TfidfVectorizer
 
 def plot_wordcloud(words):
     wc = WordCloud(background_color="white", 
@@ -20,7 +27,9 @@ def plot_wordcloud(words):
                    colormap='Spectral', 
                    contour_color='steelblue')
     wc.generate_from_frequencies(words)
-    st.pyplot(wc.to_image())
+    plt.figure(figsize=(10, 8))
+    plt.imshow(wc, interpolation='bilinear')
+    plt.axis("off")
 
 def plot_bar(words):
     words_count = Counter(words)
@@ -30,9 +39,8 @@ def plot_bar(words):
     ax.set_title('Top Words')
     ax.set_xlabel('Words')
     ax.set_ylabel('Count')
-    ax.tick_params(axis='x', labelrotation=45, labelsize=8)
-    st.pyplot(ax.figure)
-
+    ax.tick_params(axis='x', labelrotation=45, labelsize=8)      
+    
 def get_count_top_words(df, start_date=None, last_date=None, num_words=10, name=None):
     if name is not None:
         df = df[df['name'] == name]
@@ -46,20 +54,11 @@ def get_count_top_words(df, start_date=None, last_date=None, num_words=10, name=
     count_df = pd.DataFrame(count.todense(), columns=count_vectorizer.get_feature_names_out())
     count_top_words = count_df.sum().sort_values(ascending=False).head(num_words).to_dict()
     
+    plt.figure(figsize=(12, 6))
     plot_wordcloud(count_top_words)
     plot_bar(count_top_words)
+    plt.show()
 
-# streamlit 앱
-st.title("WordCloud and Top Words Bar Plot")
-# 데이터 불러오기
-df = pd.read_csv("https://raw.githubusercontent.com/seoinhyeok96/BusyPeople/main/data/%ED%8A%B8%EB%A0%8C%EB%93%9C_%EC%A0%9C%EB%AA%A9%2B%EB%82%B4%EC%9A%A9.csv")
-# 필터링 옵션 설정
-name = st.sidebar.text_input("Name", "")
-start_date = st.sidebar.date_input("Start Date")
-last_date = st.sidebar.date_input("Last Date")
-num_words = st.sidebar.slider("Number of Words", min_value=5, max_value=50, value=10)
-# 결과 출력
-get_count_top_words(df, start_date=start_date, last_date=last_date, num_words=num_words, name=name)
 
 
 
