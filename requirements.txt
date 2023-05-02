@@ -10,3 +10,4 @@ koreanize-matplotlib
 wordcloud
 CountVectorizer
 TfidfVectorize
+sklearn.feature_extraction.text
