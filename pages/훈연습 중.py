@@ -38,8 +38,6 @@ def main():
             data = get_words(df, 'title+content', keyword)
             df_data = pd.DataFrame(data, columns=["Source", "Target", "Weight"])
 
-        st.success(f"<{keyword}>에 대한 연관어 분석 결과입니다😀")
-
         # Define the data
         data = get_words(df, 'title+content', keyword)
         df_data = pd.DataFrame(data, columns=["Source", "Target", "Weight"])
@@ -62,6 +60,7 @@ def main():
         nx.draw_networkx_labels(G, pos, font_size=12, font_family='NanumGothic', font_weight='bold')
         nx.draw_networkx_edge_labels(G, pos, edge_labels=labels, font_size=12, font_family='NanumGothic')
 
+        st.success(f"<{keyword}>에 대한 연관어 분석 결과입니다😀")
         plt.axis('off')
         st.pyplot()
 
