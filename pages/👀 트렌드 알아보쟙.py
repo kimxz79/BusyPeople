@@ -14,13 +14,15 @@ col1, col2 = st.beta_columns(2)
 
 # 첫 번째 컬럼에 시작 날짜 입력 위젯 추가
 with col1:
-    start_date = st.date_input("Start date", datetime.today() - timedelta(days=30),
+    start_date = st.date_input("Start date",
+                           value=datetime.today() - timedelta(days=30)
                            min_value=datetime(2022, 4, 27),
                            max_value=datetime(2023, 4, 26))
 
 # 두 번째 컬럼에 끝 날짜 입력 위젯 추가
 with col2:
-    end_date = st.date_input("End date", datetime.today(),
+    end_date = st.date_input("End date", 
+                         value=datetime.today() - timedelta(days=15)    
                          min_value=datetime(2022, 4, 27),
                          max_value=datetime(2023, 4, 26))
 
