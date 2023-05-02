@@ -1,25 +1,21 @@
 import streamlit as st
 import pandas as pd
-import numpy as np
-import networkx as nx
-import plotly.graph_objs as go
-from  PIL import Image
+from streamlit_agraph import agraph, TripleStore
 
-#Add a logo (optional) in the sidebar
-logo = Image.open(r'C:\Users\13525\Desktop\Insights_Bees_logo.png')
-st.sidebar.image(logo,  width=120)
+# Define the data
+data = [('식물', 'lemon', 8.773420979111814),
+        ('식물', '때싹', 8.166747080757542),
+        ('식물', '호잇', 8.006354458119853),
+        ('식물', '섬광탄', 7.954529050820706),
+        ('식물', '개굴', 7.7866337930292415),
+        ('식물', '빙고', 7.6275987515220764),
+        ('식물', '에스카르고', 7.4945584243029275)]
 
-#Add the expander to provide some information about the app
-with st.sidebar.expander("About the App"):
-     st.write("""
-        This network graph app was built by My Data Talk using Streamlit and Plotly. You can use the app to quickly generate an interactive network graph with different layout choices.
-     """)
+# Create a triple store from the data
+ts = TripleStore()
+for row in data:
+    ts.add_triple(*row)
 
-#Add a file uploader to the sidebar
-uploaded_file = st.sidebar.file_uploader('',type=['csv']) #Only accepts csv file format
-
-#Add an app title. Use css to style the title
-st.markdown(""" <style> .font {                                          
-    font-size:30px ; font-family: 'Cooper Black'; color: #FF9633;} 
-    </style> """, unsafe_allow_html=True)
-st.markdown('<p class="font">Upload your data and generate an interactive network graph instantly...</p>', unsafe_allow_html=True)
+# Create the network graph
+st.title('Network Graph')
+agraph(ts)
