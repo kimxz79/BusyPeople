@@ -13,13 +13,6 @@ agree2 = st.checkbox('식물갤러리')
 
 
 
-
-import matplotlib.pyplot as plt
-from collections import Counter
-from wordcloud import WordCloud
-import koreanize_matplotlib
-from sklearn.feature_extraction.text import CountVectorizer, TfidfVectorizer
-
 df = pd.read_csv('https://raw.githubusercontent.com/seoinhyeok96/BusyPeople/main/data/%ED%8A%B8%EB%A0%8C%EB%93%9C_%EC%A0%9C%EB%AA%A9%2B%EB%82%B4%EC%9A%A9.csv')
 
 def plot_wordcloud(words):
@@ -61,9 +54,7 @@ def get_count_top_words(df, start_date=None, last_date=None, num_words=10, name=
     plot_bar(count_top_words)
     plt.show()
 
-
-
-
+get_count_top_words(df, '2023-01-01', '2023-02-01', 50, '밴드')
 
 
 
