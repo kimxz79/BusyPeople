@@ -49,20 +49,20 @@ def plot_bar(words):
     
 def get_count_top_words(df, start_date=None, last_date=None, num_words=10, name=None):
     if name is not None:
-    df = df[df['name'] == name]
+        df = df[df['name'] == name]
     if start_date is None:
-    start_date = df['time'].min().strftime('%Y-%m-%d')
+        start_date = df['time'].min().strftime('%Y-%m-%d')
     if last_date is None:
-    last_date = df['time'].max().strftime('%Y-%m-%d')
-    df = df[(df['time'] >= start_date) & (df['time'] <= last_date)]
-    count_vectorizer = CountVectorizer()
-    count = count_vectorizer.fit_transform(df['title+content'].values)
-    count_df = pd.DataFrame(count.todense(), columns=count_vectorizer.get_feature_names_out())
-    count_top_words = count_df.sum().sort_values(ascending=False).head(num_words).to_dict()
-    plt.figure(figsize=(12, 6))
-    plot_wordcloud(count_top_words)
-    plot_bar(count_top_words)
-    plt.show()
+        last_date = df['time'].max().strftime('%Y-%m-%d')
+        df = df[(df['time'] >= start_date) & (df['time'] <= last_date)]
+        count_vectorizer = CountVectorizer()
+        count = count_vectorizer.fit_transform(df['title+content'].values)
+        count_df = pd.DataFrame(count.todense(), columns=count_vectorizer.get_feature_names_out())
+        count_top_words = count_df.sum().sort_values(ascending=False).head(num_words).to_dict()
+        plt.figure(figsize=(12, 6))
+        plot_wordcloud(count_top_words)
+        plot_bar(count_top_words)
+        plt.show()
     
  
 
