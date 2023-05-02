@@ -19,37 +19,16 @@ options = st.multiselect(
 st.write('You selected:', options)
 
 
+# 파일 업로드
+file = st.file_uploader("https://raw.githubusercontent.com/seoinhyeok96/BusyPeople/main/data/%ED%8A%B8%EB%A0%8C%EB%93%9C_%EC%A0%9C%EB%AA%A9%2B%EB%82%B4%EC%9A%A9.csv", type=["csv"])
 
-df = pd.read_csv('https://raw.githubusercontent.com/seoinhyeok96/BusyPeople/main/data/%ED%8A%B8%EB%A0%8C%EB%93%9C_%EC%A0%9C%EB%AA%A9%2B%EB%82%B4%EC%9A%A9.csv')
-df['time'] = pd.to_datetime(df['time'])
-
-def get_count_top_words(df, start_date=None, last_date=None, num_words=10, name=None):
-    if name is not None:
-        df = df[df['name'] == name]
-    if start_date is None:
-        start_date = df['time'].min().strftime('%Y-%m-%d')
-    if last_date is None:
-        last_date = df['time'].max().strftime('%Y-%m-%d')
-    df = df[(df['time'] >= start_date) & (df['time'] <= last_date)]
-    count_vectorizer = CountVectorizer()
-    count = count_vectorizer.fit_transform(df['title+content'].values)
-    count_df = pd.DataFrame(count.todense(), columns=count_vectorizer.get_feature_names_out())
-    count_top_words = count_df.sum().sort_values(ascending=False).head(num_words).to_dict()
+# 파일이 업로드된 경우
+if file is not None:
+    # 업로드한 파일을 pandas 데이터프레임으로 읽기
+    df = pd.read_csv(file)
     
-    st.set_option('deprecation.showPyplotGlobalUse', False)
-    st.write('## Word Cloud')
-    plt.figure(figsize=(12, 6))
-    plot_wordcloud(count_top_words)
-    st.pyplot()
+    # 데이터프레임 출력
+    st.dataframe(df)
     
-    st.write('## Bar Plot')
-    plt.figure(figsize=(12, 6))
-    plot_bar(count_top_words)
-    st.pyplot()
-    
-    
-    def load_data():
-    # Load your data using pandas
-    # Example:
-        df = pd.read_csv('https://raw.githubusercontent.com/seoinhyeok96/BusyPeople/main/data/%ED%8A%B8%EB%A0%8C%EB%93%9C_%EC%A0%9C%EB%AA%A9%2B%EB%82%B4%EC%9A%A9.csv')
-    return df
+    # 데이터프레임 정보 출력
+    st.write(df.info())
