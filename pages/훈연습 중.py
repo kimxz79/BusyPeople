@@ -34,7 +34,7 @@ def main():
     keyword = message
     if st.button('분석하기'):
         with st.spinner('분석 중입니다...'):
-        st.success(f"<{keyword}>에 대한 연관어 분석 결과입니다😀")
+            st.success(f"<{keyword}>에 대한 연관어 분석 결과입니다😀")
 
         # Define the data
         data = get_words(df, 'title+content', keyword)
