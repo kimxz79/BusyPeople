@@ -46,26 +46,50 @@ bar_df = df.sort_values(by=['count'],ascending=False).reset_index(drop=True).ilo
 st.bar_chart(bar_df)
 
 
-import plotly
+from wordcloud import WordCloud, STOPWORDS
 import plotly.graph_objs as go
-from plotly.offline import plot
-import random
 
-words = list(dict_0.keys())
-colors = [plotly.colors.DEFAULT_PLOTLY_COLORS[random.randrange(1, 10)] for i in range(30)]
-weights = [random.randint(15, 35) for i in range(30)]
+word_list=[]
+freq_list=[]
+fontsize_list=[]
+position_list=[]
+orientation_list=[]
+color_list=[]
 
-data = go.Scatter(x=[random.random() for i in range(30)],
-                 y=[random.random() for i in range(30)],
-                 mode='text',
-                 text=words,
-                 marker={'opacity': 0.3},
-                 textfont={'size': weights,
-                           'color': colors})
+for (word, freq), fontsize, position, orientation, color in wc.layout_:
+    word_list.append(word)
+    freq_list.append(freq)
+    fontsize_list.append(fontsize)
+    position_list.append(position)
+    orientation_list.append(orientation)
+    color_list.append(color)
+    
+# get the positions
+x=[]
+y=[]
+for i in position_list:
+    x.append(i[0])
+    y.append(i[1])
+        
+# get the relative occurence frequencies
+new_freq_list = []
+for i in freq_list:
+    new_freq_list.append(i*100)
+new_freq_list
+
+trace = go.Scatter(x=x, 
+                    y=y, 
+                    textfont = dict(size=new_freq_list,
+                                    color=color_list),
+                    hoverinfo='text',
+                    hovertext=['{0}{1}'.format(w, f) for w, f in zip(word_list, freq_list)],
+                    mode='text',  
+                    text=word_list
+                    )
 
 layout = go.Layout({'xaxis': {'showgrid': False, 'showticklabels': False, 'zeroline': False},
                     'yaxis': {'showgrid': False, 'showticklabels': False, 'zeroline': False}})
 
-fig = go.Figure(data=[data], layout=layout)
+fig = go.Figure(data=[trace], layout=layout)
 
 fig
