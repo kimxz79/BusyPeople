@@ -5,7 +5,8 @@ import matplotlib.pyplot as plt
 from gensim.models import Word2Vec
 
 def to_list(text):
-    return text.split('|||')
+    return ast.literal_eval(text)
+df['title+content'] = df['title+content'].map(to_list)
 
 #데이터 전처리
 df = pd.read_csv('https://raw.githubusercontent.com/seoinhyeok96/BusyPeople/main/data/%ED%8A%B8%EB%A0%8C%EB%93%9C_%EC%A0%9C%EB%AA%A9%2B%EB%82%B4%EC%9A%A9.csv')
@@ -15,7 +16,7 @@ def get_words(df, col, keyword):
     text_list=[]
     for sublist in df[col]:
         text_list.append(sublist)
-    model = Word2Vec(text_list, vector_size=100, window=5, min_count=1, workers=4, epochs=100)
+    model = Word2Vec(text_list, vector_size=100, window=5, min_count=1, workers=4, epochs=50)
     try:
         similar_words = model.wv.most_similar(keyword, topn=10)
         results = [(keyword, word, score) for word, score in similar_words]
@@ -62,4 +63,6 @@ def main():
     
             st.success(f"<{keyword}>에 대한 연관어 분석 결과입니다😀")
             plt.axis('off')
-           
+  
+if __name__ == '__main__':
+    main()
