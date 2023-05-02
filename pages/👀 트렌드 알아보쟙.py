@@ -1,19 +1,28 @@
 import warnings
 warnings.filterwarnings("ignore", message="PyplotGlobalUseWarning")
-import streamlit as st
+
 import pandas as pd
-import networkx as nx
 import matplotlib.pyplot as plt
 import ast
-from gensim.models import Word2Vec
 import time
 
 import streamlit as st
 from datetime import datetime, timedelta
 
-# 시작 날짜와 끝 날짜를 선택하는 daterange 위젯 생성
-start_date = st.date_input("Start date", datetime.today() - timedelta(days=30))
-end_date = st.date_input("End date", datetime.today())
+# 2개의 컬럼 생성
+col1, col2 = st.beta_columns(2)
+
+# 첫 번째 컬럼에 시작 날짜 입력 위젯 추가
+with col1:
+    start_date = st.date_input("Start date", datetime.today() - timedelta(days=30),
+                           min_value=datetime(2022, 4, 27),
+                           max_value=datetime(2023, 4, 26))
+
+# 두 번째 컬럼에 끝 날짜 입력 위젯 추가
+with col2:
+    end_date = st.date_input("End date", datetime.today(),
+                         min_value=datetime(2022, 4, 27),
+                         max_value=datetime(2023, 4, 26))
 
 # 선택된 시작 날짜와 끝 날짜 출력
 st.write("Selected date range:", start_date, "to", end_date)
