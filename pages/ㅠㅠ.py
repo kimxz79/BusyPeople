@@ -13,22 +13,21 @@ agree2 = st.checkbox('식물갤러리')
 
 options = st.multiselect(
     '단어를 선택하세요',
-    ['식물', '몬스테라', '영양제', ''],
-    ['Yellow', 'Red'])
+    ['식물', '몬스테라', '영양제',])
 
 st.write('You selected:', options)
 
 
-# 파일 업로드
-file = st.file_uploader("", type=["csv"])
+# 파일 업로드를 위한 메시지를 출력합니다.
+st.write("CSV 파일을 업로드하세요.")
 
-# 파일이 업로드된 경우
-if file is not None:
-    # 업로드한 파일을 pandas 데이터프레임으로 읽기
-    df = pd.read_csv(file)
-    
-    # 데이터프레임 출력
-    st.dataframe(df)
-    
-    # 데이터프레임 정보 출력
-    st.write(df.info())
+# 파일 업로드를 받습니다.
+uploaded_file = st.file_uploader("")
+
+# 업로드된 파일이 있다면
+if uploaded_file is not None:
+    # 업로드된 파일을 읽어들입니다.
+    df = pd.read_csv(uploaded_file)
+
+    # 읽어들인 데이터를 출력합니다.
+    st.write(df)
