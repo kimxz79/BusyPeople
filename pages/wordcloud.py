@@ -104,4 +104,4 @@ fig.add_trace(go.Scatter(x=[2, 3, 4], y=[5, 6, 7], mode='markers', hoverinfo='x+
 fig.update_layout(xaxis=dict(domain=[0, 0.45]), yaxis=dict(domain=[0, 1]),
                   xaxis2=dict(domain=[0.55, 1]), yaxis2=dict(domain=[0, 1]))
 
-fig.show()
+fig
