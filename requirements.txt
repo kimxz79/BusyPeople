@@ -9,4 +9,3 @@ matplotlib
 koreanize-matplotlib
 wordcloud
 sklearn
-
