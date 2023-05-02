@@ -6,6 +6,7 @@ import networkx as nx
 import matplotlib.pyplot as plt
 import ast
 from gensim.models import Word2Vec
+import time
 
 #데이터 전처리
 df = pd.read_csv('https://raw.githubusercontent.com/seoinhyeok96/BusyPeople/main/data/%ED%8A%B8%EB%A0%8C%EB%93%9C_%EC%A0%9C%EB%AA%A9%2B%EB%82%B4%EC%9A%A9.csv')
@@ -32,6 +33,8 @@ def main():
     message = st.text_area('키워드를 입력하세요')
     keyword = message
     if st.button('분석하기'):
+        with st.spinner('분석 중입니다...'):
+            time.sleep(5)
         st.success(f"<{keyword}>에 대한 연관어 분석 결과입니다😀")
 
         # Define the data
