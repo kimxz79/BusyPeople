@@ -11,4 +11,4 @@ wordcloud
 scikit-image==0.19.2
 datetime
 scikit-learn
-streamlit_agraph
+streamlit_agraph==0.1.1
