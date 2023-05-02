@@ -55,13 +55,14 @@ words = list(dict_0.keys())
 colors = [plotly.colors.DEFAULT_PLOTLY_COLORS[random.randrange(1, 10)] for i in range(30)]
 weights = [random.randint(15, 35) for i in range(30)]
 
-data = go.Scatter(x=[random.random() for i in range(30)],
-                 y=[random.random() for i in range(30)],
-                 mode='text',
-                 text=words,
-                 marker={'opacity': 0.3},
-                 textfont={'size': list(dict_0.values()),
-                           'color': colors})
+data = go.Scatter(
+    x=list(dict_0.values()).max(),
+    y=list(dict_0.values()).max(),
+    mode='text',
+    text=words,
+    marker={'opacity': 0.3},
+    textfont={'size': list(dict_0.values()),
+            'color': colors})
 
 layout = go.Layout({'xaxis': {'showgrid': False, 'showticklabels': False, 'zeroline': False},
                     'yaxis': {'showgrid': False, 'showticklabels': False, 'zeroline': False}})
