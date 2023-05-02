@@ -11,7 +11,12 @@ st.title('한눈에 보는 데이터 프레임')
 agree = st.checkbox('밴드')
 agree2 = st.checkbox('식물갤러리')
 
+options = st.multiselect(
+    'What are your favorite colors',
+    ['Green', 'Yellow', 'Red', 'Blue'],
+    ['Yellow', 'Red'])
 
+st.write('You selected:', options)
 
 
 
