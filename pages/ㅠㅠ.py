@@ -20,12 +20,6 @@ st.write('You selected:', options)
 
 df = pd.read_csv('https://raw.githubusercontent.com/seoinhyeok96/BusyPeople/main/data/%ED%8A%B8%EB%A0%8C%EB%93%9C_%EC%A0%9C%EB%AA%A9%2B%EB%82%B4%EC%9A%A9.csv')
     
-def main():
-    # 폰트 설정
-    plt.rc('font', family='NanumGothic')
-
-    st.title('메인 키워드')
-    
 def plot_wordcloud(words):
     wc = WordCloud(background_color="white", 
     max_words=1000,font_path = "AppleGothic", 
@@ -46,7 +40,7 @@ def plot_bar(words):
     ax.set_xlabel('Words')
     ax.set_ylabel('Count')
     ax.tick_params(axis='x', labelrotation=45, labelsize=8)      
-    
+
 def get_count_top_words(df, start_date=None, last_date=None, num_words=10, name=None):
     if name is not None:
         df = df[df['name'] == name]
@@ -54,21 +48,25 @@ def get_count_top_words(df, start_date=None, last_date=None, num_words=10, name=
         start_date = df['time'].min().strftime('%Y-%m-%d')
     if last_date is None:
         last_date = df['time'].max().strftime('%Y-%m-%d')
-        df = df[(df['time'] >= start_date) & (df['time'] <= last_date)]
-        count_vectorizer = CountVectorizer()
-        count = count_vectorizer.fit_transform(df['title+content'].values)
-        count_df = pd.DataFrame(count.todense(), columns=count_vectorizer.get_feature_names_out())
-        count_top_words = count_df.sum().sort_values(ascending=False).head(num_words).to_dict()
-        plt.figure(figsize=(12, 6))
-        plot_wordcloud(count_top_words)
-        plot_bar(count_top_words)
-        plt.show()
-    
- 
+    df = df[(df['time'] >= start_date) & (df['time'] <= last_date)]
+    count_vectorizer = CountVectorizer()
+    count = count_vectorizer.fit_transform(df['title+content'].values)
+    count_df = pd.DataFrame(count.todense(), columns=count_vectorizer.get_feature_names_out())
+    count_top_words = count_df.sum().sort_values(ascending=False).head(num_words).to_dict()
+    plt.figure(figsize=(12, 6))
+    plot_wordcloud(count_top_words)
+    plot_bar(count_top_words)
+    st.pyplot()
 
-
-if __name__ == '__main__':
-    main()  
+def main():
+    # 폰트 설정
+    plt.rc('font', family='NanumGothic')
+    st.title('메인 키워드')
+    df = pd.read_csv('https://raw.githubusercontent.com/seoinhyeok96/BusyPeople/main/data/%ED%8A%B8%EB%A0%8C%EB%93%9C_%EC%A0%9C%EB%AA%A9%2B%EB%82%B4%EC%9A%A9.csv')
+    name = st.sidebar.text_input('이름을 입력하세요.')
+    start_date = st.sidebar.text_input('시작 날짜를 입력하세요.')
+    last_date = st.sidebar.text_input('끝 날짜를 입력하세요.')
+    num_words = st.sidebar.slider('키워드 개수', min_value=1, max_value=20,)
     
     
 
