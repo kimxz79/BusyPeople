@@ -8,4 +8,8 @@ seaborn
 matplotlib
 koreanize-matplotlib
 wordcloud
+scikit-image==0.19.2
+datetime
 scikit-learn
+networkx
+gensim
