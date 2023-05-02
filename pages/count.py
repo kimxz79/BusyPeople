@@ -19,18 +19,24 @@ df['time'] = pd.to_datetime(df['time'])
 
 def plot_wordcloud(words):
     wc = WordCloud(background_color="white", 
-                   max_words=1000,
-                   font_path = "NanumBarunGothic.ttf", 
+                   max_words=1000,font_path = "AppleGothic", 
                    contour_width=3, 
                    colormap='Spectral', 
                    contour_color='steelblue')
-    return wc.generate_from_frequencies(words)
+    wc.generate_from_frequencies(words)
+    plt.figure(figsize=(10, 8))
+    plt.imshow(wc, interpolation='bilinear')
+    plt.axis("off")
 
 def plot_bar(words):
     words_count = Counter(words)
     words_df = pd.DataFrame.from_dict(words_count, orient='index', columns=['count'])
     words_df.sort_values('count', ascending=False, inplace=True)
-    return words_df
+    ax = words_df.plot(kind='bar', figsize=(10, 4))
+    ax.set_title('Top Words')
+    ax.set_xlabel('Words')
+    ax.set_ylabel('Count')
+    ax.tick_params(axis='x', labelrotation=45, labelsize=8)      
     
 def get_count_top_words(df, start_date=None, last_date=None, num_words=10, name=None):
     if name is not None:
@@ -44,20 +50,8 @@ def get_count_top_words(df, start_date=None, last_date=None, num_words=10, name=
     count = count_vectorizer.fit_transform(df['title+content'].values)
     count_df = pd.DataFrame(count.todense(), columns=count_vectorizer.get_feature_names_out())
     count_top_words = count_df.sum().sort_values(ascending=False).head(num_words).to_dict()
-    return count_top_words
     
-df_ = get_count_top_words(df, '2023-01-01', '2023-02-01', 50, '밴드')
-barplot = plot_bar(df_)
-wordcloud = plot_wordcloud(df_)
-
-fig, ax = plt.subplots(
-    figsize=(12,12)
-)
-
-# Display the generated image:
-plt.imshow(wordcloud, interpolation='bilinear')
-plt.axis("off")
-plt.show()
-
-st.bar_chart(barplot)
-
+    plt.figure(figsize=(12, 6))
+    plot_wordcloud(count_top_words)
+    plot_bar(count_top_words)
+    plt.show()
