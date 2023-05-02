@@ -1,6 +1,19 @@
+from collections import Counter
+
+import pandas as pd
+import matplotlib.pyplot as plt
+import koreanize_matplotlib
+
+from wordcloud import WordCloud
+
+
+df = pd.read_csv('https://raw.githubusercontent.com/seoinhyeok96/BusyPeople/main/data/%ED%8A%B8%EB%A0%8C%EB%93%9C_%EC%A0%9C%EB%AA%A9%2B%EB%82%B4%EC%9A%A9.csv')
+
+
 def plot_wordcloud(words):
     wc = WordCloud(background_color="white", 
-                   max_words=1000,font_path = "AppleGothic", 
+                   max_words=1000,
+                   font_path = "AppleGothic", 
                    contour_width=3, 
                    colormap='Spectral', 
                    contour_color='steelblue')
