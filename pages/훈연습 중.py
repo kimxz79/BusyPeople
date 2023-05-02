@@ -37,8 +37,9 @@ def main():
 
         labels = {}
         for edge in G.edges(data=True):
-            if edge[2]['weight'] > 8:
-                labels[(edge[0], edge[1])] = edge[2]['weight']
+            labels[(edge[0], edge[1])] = f"{edge[2]['weight']:.2f}"
+
+        edge_widths = [data[i][2] for i in range(len(data))]
 
         nx.draw_networkx_edges(G, pos)
         nx.draw_networkx_nodes(G, pos, node_color='lightblue', node_size=500)
