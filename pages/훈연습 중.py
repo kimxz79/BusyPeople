@@ -15,7 +15,7 @@ def get_words(df, col, keyword):
     text_list=[]
     for sublist in df[col]:
         text_list.append(sublist)
-    model = Word2Vec(text_list, vector_size=100, window=5, min_count=1, workers=3, epochs=50)
+    model = Word2Vec(text_list, vector_size=100, window=5, min_count=1, workers=4, epochs=100)
     try:
         similar_words = model.wv.most_similar(keyword, topn=10)
         results = [(keyword, word, score) for word, score in similar_words]
@@ -23,8 +23,8 @@ def get_words(df, col, keyword):
     except:
         return None
 
-def show_modal(df):
-    st.table(df)
+# def show_modal(df):
+#     st.table(df)
 
 def main():
     # 폰트 설정
@@ -38,7 +38,7 @@ def main():
             # Define the data
             data = get_words(df, 'title+content', keyword)
             if data is None:
-                st.warning('다른 키워드를 입력해주세요. 추천 키워드 : 제라늄, 꽃피우는시간')
+                st.warning('다른 키워드를 입력해주세요. 추천 키워드 : 제라늄')
             else:
                 df_data = pd.DataFrame(data, columns=["Source", "Target", "Weight"])
 
