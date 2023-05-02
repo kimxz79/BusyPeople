@@ -30,12 +30,7 @@ def plot_bar(words):
     words_count = Counter(words)
     words_df = pd.DataFrame.from_dict(words_count, orient='index', columns=['count'])
     words_df.sort_values('count', ascending=False, inplace=True)
-    ax = words_df.plot(kind='bar', figsize=(10, 4))
-    ax.set_title('Top Words')
-    ax.set_xlabel('Words')
-    ax.set_ylabel('Count')
-    ax.tick_params(axis='x', labelrotation=45, labelsize=8)
-    return ax
+    return words_df
     
 def get_count_top_words(df, start_date=None, last_date=None, num_words=10, name=None):
     if name is not None:
