@@ -54,7 +54,7 @@ import random
 
 words = list(dict_0.keys())
 colors = [plotly.colors.DEFAULT_PLOTLY_COLORS[random.randrange(1, 10)] for i in range(30)]
-weights = np.log(list(dict_0.values()))
+weights = [int(i) for i in np.log(list(dict_0.values()))]
 
 data = go.Scatter(x=[random.random() for i in range(30)],
                  y=[random.random() for i in range(30)],
