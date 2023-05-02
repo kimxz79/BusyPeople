@@ -20,7 +20,7 @@ st.write('You selected:', options)
 
 
 # 파일 업로드
-file = st.file_uploader("https://raw.githubusercontent.com/seoinhyeok96/BusyPeople/main/data/%ED%8A%B8%EB%A0%8C%EB%93%9C_%EC%A0%9C%EB%AA%A9%2B%EB%82%B4%EC%9A%A9.csv", type=["csv"])
+file = st.file_uploader("", type=["csv"])
 
 # 파일이 업로드된 경우
 if file is not None:
