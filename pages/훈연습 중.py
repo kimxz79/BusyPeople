@@ -24,7 +24,10 @@ def get_words(df, col, keyword):
     similar_words = model.wv.most_similar(keyword, topn=10)
     results = [(keyword, word, score) for word, score in similar_words]
     return results
-    
+
+def show_modal(df):
+    st.write(df)
+
 def main():
     # 폰트 설정
     plt.rc('font', family='NanumGothic')
@@ -64,11 +67,10 @@ def main():
             plt.axis('off')
             st.pyplot()
 
-        show_data = st.checkbox('분석 결과 데이터 보기')
-        
-        if show_data:
-            st.dataframe(df_data)
-
+        # 모달에 데이터프레임 보여주기
+        if st.button('분석 결과 데이터 보기'):
+            show_modal(df_data)
+            
 if __name__ == '__main__':
     main()
 
