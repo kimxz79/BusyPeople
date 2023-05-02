@@ -12,8 +12,8 @@ agree = st.checkbox('밴드')
 agree2 = st.checkbox('식물갤러리')
 
 options = st.multiselect(
-    'What are your favorite colors',
-    ['Green', 'Yellow', 'Red', 'Blue'],
+    '단어를 선택하세요',
+    ['식물', '몬스테라', '영양제', ''],
     ['Yellow', 'Red'])
 
 st.write('You selected:', options)
@@ -23,28 +23,6 @@ st.write('You selected:', options)
 df = pd.read_csv('https://raw.githubusercontent.com/seoinhyeok96/BusyPeople/main/data/%ED%8A%B8%EB%A0%8C%EB%93%9C_%EC%A0%9C%EB%AA%A9%2B%EB%82%B4%EC%9A%A9.csv')
 df['time'] = pd.to_datetime(df['time'])
 
-
-def plot_wordcloud(words):
-    wc = WordCloud(background_color="white", 
-                   max_words=1000,font_path = "NanumBarunGothic.ttf", 
-                   contour_width=3, 
-                   colormap='Spectral', 
-                   contour_color='steelblue')
-    wc.generate_from_frequencies(words)
-    plt.figure(figsize=(10, 8))
-    plt.imshow(wc, interpolation='bilinear')
-    plt.axis("off")
-
-def plot_bar(words):
-    words_count = Counter(words)
-    words_df = pd.DataFrame.from_dict(words_count, orient='index', columns=['count'])
-    words_df.sort_values('count', ascending=False, inplace=True)
-    ax = words_df.plot(kind='bar', figsize=(10, 4))
-    ax.set_title('Top Words')
-    ax.set_xlabel('Words')
-    ax.set_ylabel('Count')
-    ax.tick_params(axis='x', labelrotation=45, labelsize=8)      
-    
 def get_count_top_words(df, start_date=None, last_date=None, num_words=10, name=None):
     if name is not None:
         df = df[df['name'] == name]
@@ -58,9 +36,20 @@ def get_count_top_words(df, start_date=None, last_date=None, num_words=10, name=
     count_df = pd.DataFrame(count.todense(), columns=count_vectorizer.get_feature_names_out())
     count_top_words = count_df.sum().sort_values(ascending=False).head(num_words).to_dict()
     
+    st.set_option('deprecation.showPyplotGlobalUse', False)
+    st.write('## Word Cloud')
     plt.figure(figsize=(12, 6))
     plot_wordcloud(count_top_words)
-    plot_bar(count_top_words)
-    plt.show()
+    st.pyplot()
     
-get_count_top_words(df, '2023-01-01', '2023-02-01', 50, '밴드')
+    st.write('## Bar Plot')
+    plt.figure(figsize=(12, 6))
+    plot_bar(count_top_words)
+    st.pyplot()
+    
+    
+    def load_data():
+    # Load your data using pandas
+    # Example:
+    df = pd.read_csv('https://raw.githubusercontent.com/seoinhyeok96/BusyPeople/main/data/%ED%8A%B8%EB%A0%8C%EB%93%9C_%EC%A0%9C%EB%AA%A9%2B%EB%82%B4%EC%9A%A9.csv')
+    return df
