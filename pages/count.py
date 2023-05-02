@@ -19,7 +19,7 @@ df['time'] = pd.to_datetime(df['time'])
 
 def plot_wordcloud(words):
     wc = WordCloud(background_color="white", 
-                   max_words=1000,font_path = "AppleGothic", 
+                   max_words=1000,font_path = "NanumBarunGothic.ttf", 
                    contour_width=3, 
                    colormap='Spectral', 
                    contour_color='steelblue')
