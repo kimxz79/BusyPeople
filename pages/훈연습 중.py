@@ -19,10 +19,10 @@ def get_words(df, col, keyword):
     text_list=[]
     for sublist in df[col]:
         text_list.append(sublist)
-
     model = Word2Vec(text_list, vector_size=100, window=5, min_count=1, workers=4, epochs=100)
     similar_words = model.wv.most_similar(keyword, topn=10)
-    return similar_words
+    results = [(keyword, word, score) for word, score in similar_words]
+    return results
     
 def main():
     # 폰트 설정
@@ -32,7 +32,7 @@ def main():
     message = st.text_area('키워드를 입력하세요')
     keyword = message
     if st.button('분석하기'):
-        st.success(f"{keyword}에 대한 연관어 분석 결과입니다")
+        st.success(f"<{keyword}>에 대한 연관어 분석 결과입니다😀")
 
         # Define the data
         data = get_words(df, 'title+content', keyword)
