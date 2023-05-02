@@ -39,6 +39,7 @@ def main():
 
         # Define the data
         data = get_words(df, 'title+content', keyword)
+        df_data = pd.DataFrame(data, columns=["Source", "Target", "Weight"])
 
         # Create the network graph
         G = nx.DiGraph()
@@ -60,6 +61,10 @@ def main():
 
         plt.axis('off')
         st.pyplot()
+
+        show_data = st.checkbox('분석 결과 데이터 보기')
+        if show_data:
+            st.dataframe(df_data)
 
 if __name__ == '__main__':
     main()
