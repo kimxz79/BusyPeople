@@ -8,6 +8,7 @@ from wordcloud import WordCloud
 
 
 df = pd.read_csv('https://raw.githubusercontent.com/seoinhyeok96/BusyPeople/main/data/%ED%8A%B8%EB%A0%8C%EB%93%9C_%EC%A0%9C%EB%AA%A9%2B%EB%82%B4%EC%9A%A9.csv')
+df['time'] = pd.to_datetime(df['time'])
 
 
 def plot_wordcloud(words):
@@ -45,3 +46,9 @@ def get_count_top_words(df, start_date=None, last_date=None, num_words=10, name=
     count_df = pd.DataFrame(count.todense(), columns=count_vectorizer.get_feature_names_out())
     count_top_words = count_df.sum().sort_values(ascending=False).head(num_words).to_dict()
     
+    plt.figure(figsize=(12, 6))
+    plot_wordcloud(count_top_words)
+    plot_bar(count_top_words)
+    plt.show()
+    
+get_count_top_words(df, '2023-01-01', '2023-02-01', 50, '밴드')
