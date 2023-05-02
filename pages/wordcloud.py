@@ -55,6 +55,7 @@ import plotly
 import plotly.graph_objs as go
 from plotly.offline import plot
 import random
+
 data = go.Scatter(x=[random.random() for i in range(30)],
                  y=[random.random() for i in range(30)],
                  mode='text',
@@ -67,4 +68,3 @@ layout = go.Layout({'xaxis': {'showgrid': False, 'showticklabels': False, 'zerol
 fig = go.Figure(data=[data], layout=layout)
 
 st.pyplot(fig)
-
