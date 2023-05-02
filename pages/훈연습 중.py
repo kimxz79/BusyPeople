@@ -33,16 +33,15 @@ def get_words(df, col, keyword):
 def main():
     # 폰트 설정
     plt.rc('font', family='NanumGothic')
-
     st.title('Networkx 그려보자')
-    message = st.text_area('키워드를 입력하세요')
+    message = st.text_area('궁금한 키워드를 입력하세요(1개만 입력)')
     keyword = message
     if st.button('분석하기'):
         with st.spinner('분석 중입니다...'):
             # Define the data
             data = get_words(df, 'title+content', keyword)
             if data is None:
-                st.warning('다른 키워드를 입력해주세요. 추천 키워드 : 제라늄')
+                st.warning('다른 키워드를 입력해주세요. 추천 키워드 : 제라늄🌸')
             else:
                 df_data = pd.DataFrame(data, columns=["Source", "Target", "Weight"])
 
@@ -66,6 +65,7 @@ def main():
     
             st.success(f"<{keyword}>에 대한 연관어 분석 결과입니다😀")
             plt.axis('off')
-  
+            st.pyplot()
+            
 if __name__ == '__main__':
     main()
