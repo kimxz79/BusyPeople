@@ -19,7 +19,7 @@ def get_words(df, col, keyword):
     text_list=[]
     for sublist in df[col]:
         text_list.append(sublist)
-    model = Word2Vec(text_list, vector_size=100, window=5, min_count=1, workers=4, epochs=50)
+    model = Word2Vec(text_list, vector_size=100, window=5, min_count=1, workers=3, epochs=30)
     try:
         similar_words = model.wv.most_similar(keyword, topn=10)
         results = [(keyword, word, score) for word, score in similar_words]
@@ -32,7 +32,7 @@ def show_modal(df):
 
 def main():
     # 폰트 설정
-    plt.rc('font', family='NanumGothic')
+    plt.rc('font', family='NanumBarunGothic')
     st.title('Networkx 그려보자')
     message = st.text_area('궁금한 키워드를 입력하세요(1개만 입력)')
     keyword = message
@@ -43,7 +43,7 @@ def main():
             if data is None:
                 st.warning('다른 키워드를 입력해주세요. 추천 키워드 : 제라늄🌸')
             else:
-                df_data = pd.DataFrame(data, columns=["Source", "Target", "Weight"])
+                df_data = pd.DataFrame(data, columns=["키워드", "연관 키워드", "유사도"])
 
             # Create the network graph
             G = nx.DiGraph()
@@ -61,7 +61,7 @@ def main():
             nx.draw_networkx_edges(G, pos)
             nx.draw_networkx_nodes(G, pos, node_color='lightblue', node_size=500)
             nx.draw_networkx_labels(G, pos, font_size=12, font_family='NanumGothic', font_weight='bold')
-            nx.draw_networkx_edge_labels(G, pos, edge_labels=labels, font_size=12, font_family='NanumGothic')
+            nx.draw_networkx_edge_labels(G, pos, edge_labels=labels, font_size=12, font_family='NanumBarunGothic')
     
             st.success(f"<{keyword}>에 대한 연관어 분석 결과입니다😀")
             plt.axis('off')
