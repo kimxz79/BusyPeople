@@ -11,6 +11,84 @@ st.title('한눈에 보는 데이터 프레임')
 agree = st.checkbox('밴드')
 agree2 = st.checkbox('식물갤러리')
 
+import streamlit as st
+import pandas as pd
+from collections import Counter
+from wordcloud import WordCloud
+import koreanize_matplotlib
+from sklearn.feature_extraction.text import CountVectorizer, TfidfVectorizer
+import matplotlib.pyplot as plt
+
+def plot_wordcloud(words):
+    wc = WordCloud(background_color="white", 
+                   max_words=1000,font_path = "AppleGothic", 
+                   contour_width=3, 
+                   colormap='Spectral', 
+                   contour_color='steelblue')
+    wc.generate_from_frequencies(words)
+    plt.figure(figsize=(10, 8))
+    plt.imshow(wc, interpolation='bilinear')
+    plt.axis("off")
+    st.pyplot()
+
+def plot_bar(words):
+    words_count = Counter(words)
+    words_df = pd.DataFrame.from_dict(words_count, orient='index', columns=['count'])
+    words_df.sort_values('count', ascending=False, inplace=True)
+    ax = words_df.plot(kind='bar', figsize=(10, 4))
+    ax.set_title('Top Words')
+    ax.set_xlabel('Words')
+    ax.set_ylabel('Count')
+    ax.tick_params(axis='x', labelrotation=45, labelsize=8)
+    st.pyplot()
+
+def get_count_top_words(df, start_date=None, last_date=None, num_words=10, name=None):
+    if name is not None:
+        df = df[df['name'] == name]
+    if start_date is None:
+        start_date = df['time'].min().strftime('%Y-%m-%d')
+    if last_date is None:
+        last_date = df['time'].max().strftime('%Y-%m-%d')
+    df = df[(df['time'] >= start_date) & (df['time'] <= last_date)]
+    count_vectorizer = CountVectorizer()
+    count = count_vectorizer.fit_transform(df['title+content'].values)
+    count_df = pd.DataFrame(count.todense(), columns=count_vectorizer.get_feature_names_out())
+    count_top_words = count_df.sum().sort_values(ascending=False).head(num_words).to_dict()
+    
+    st.write("## WordCloud")
+    plot_wordcloud(count_top_words)
+    st.write("## Top Words")
+    plot_bar(count_top_words)
+
+
+if __name__ == '__main__':
+    st.title("Count Top Words")
+
+    # 입력 데이터
+    data_file = st.file_uploader("Upload CSV", type=["csv"])
+
+    if data_file is not None:
+        # CSV 파일 읽어오기
+        df = pd.read_csv(data_file)
+
+        # 필터링 조건 입력
+        name = st.text_input("Name (Optional)")
+        start_date = st.date_input("Start Date (Optional)")
+        last_date = st.date_input("Last Date (Optional)")
+        num_words = st.slider("Number of Top Words", min_value=1, max_value=20, value=10)
+
+        # 분석 실행
+        get_count_top_words(df, start_date=start_date, last_date=last_date, num_words=num_words, name=name)
+
+
+
+
+
+
+
+
+
+
 
 
 DATE_COLUMN = 'date/time'
