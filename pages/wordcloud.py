@@ -80,7 +80,8 @@ trace = go.Scatter(x=x,
                     y=y, 
                     textfont = dict(size=new_freq_list,
                                     color=color_list),
-                    hoverinfo='x+y+z',xaxis='x1', yaxis='y1',
+                    hoverinfo='text',
+                    hovertext=['{0}{1}'.format(w, f) for w, f in zip(word_list, freq_list)],
                     mode='text',  
                     text=word_list
                     )
@@ -90,10 +91,17 @@ layout = go.Layout({'xaxis': {'showgrid': False, 'showticklabels': False, 'zerol
 
 fig = go.Figure(data=[trace], layout=layout)
 
+fig
+
+import plotly.graph_objects as go
+
+fig = go.Figure(data=go.Scatter(x=[1, 2, 3], y=[4, 5, 6], mode='markers', hoverinfo='x+y+z',
+                                xaxis='x1', yaxis='y1'))
+
 fig.add_trace(go.Scatter(x=[2, 3, 4], y=[5, 6, 7], mode='markers', hoverinfo='x+y+z',
                           xaxis='x2', yaxis='y2'))
 
 fig.update_layout(xaxis=dict(domain=[0, 0.45]), yaxis=dict(domain=[0, 1]),
                   xaxis2=dict(domain=[0.55, 1]), yaxis2=dict(domain=[0, 1]))
 
-fig
+fig.show()
