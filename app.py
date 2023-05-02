@@ -11,13 +11,7 @@ st.title('한눈에 보는 데이터 프레임')
 agree = st.checkbox('밴드')
 agree2 = st.checkbox('식물갤러리')
 
-import streamlit as st
-import pandas as pd
-from collections import Counter
-from wordcloud import WordCloud
-import koreanize_matplotlib
-from sklearn.feature_extraction.text import CountVectorizer, TfidfVectorizer
-import matplotlib.pyplot as plt
+
 
 def plot_wordcloud(words):
     wc = WordCloud(background_color="white", 
@@ -26,10 +20,7 @@ def plot_wordcloud(words):
                    colormap='Spectral', 
                    contour_color='steelblue')
     wc.generate_from_frequencies(words)
-    plt.figure(figsize=(10, 8))
-    plt.imshow(wc, interpolation='bilinear')
-    plt.axis("off")
-    st.pyplot()
+    st.pyplot(wc.to_image())
 
 def plot_bar(words):
     words_count = Counter(words)
@@ -40,7 +31,7 @@ def plot_bar(words):
     ax.set_xlabel('Words')
     ax.set_ylabel('Count')
     ax.tick_params(axis='x', labelrotation=45, labelsize=8)
-    st.pyplot()
+    st.pyplot(ax.figure)
 
 def get_count_top_words(df, start_date=None, last_date=None, num_words=10, name=None):
     if name is not None:
@@ -55,30 +46,20 @@ def get_count_top_words(df, start_date=None, last_date=None, num_words=10, name=
     count_df = pd.DataFrame(count.todense(), columns=count_vectorizer.get_feature_names_out())
     count_top_words = count_df.sum().sort_values(ascending=False).head(num_words).to_dict()
     
-    st.write("## WordCloud")
     plot_wordcloud(count_top_words)
-    st.write("## Top Words")
     plot_bar(count_top_words)
 
-
-if __name__ == '__main__':
-    st.title("Count Top Words")
-
-    # 입력 데이터
-    data_file = st.file_uploader("https://raw.githubusercontent.com/seoinhyeok96/BusyPeople/main/data/%ED%8A%B8%EB%A0%8C%EB%93%9C_%EC%A0%9C%EB%AA%A9%2B%EB%82%B4%EC%9A%A9.csv", type=["csv"])
-
-    if data_file is not None:
-        # CSV 파일 읽어오기
-        df = pd.read_csv('https://raw.githubusercontent.com/seoinhyeok96/BusyPeople/main/data/%ED%8A%B8%EB%A0%8C%EB%93%9C_%EC%A0%9C%EB%AA%A9%2B%EB%82%B4%EC%9A%A9.csv')
-
-        # 필터링 조건 입력
-        name = st.text_input("Name (Optional)")
-        start_date = st.date_input("Start Date (Optional)")
-        last_date = st.date_input("Last Date (Optional)")
-        num_words = st.slider("Number of Top Words", min_value=1, max_value=20, value=10)
-
-        # 분석 실행
-        get_count_top_words(df, start_date=start_date, last_date=last_date, num_words=num_words, name=name)
+# streamlit 앱
+st.title("WordCloud and Top Words Bar Plot")
+# 데이터 불러오기
+df = pd.read_csv("https://raw.githubusercontent.com/seoinhyeok96/BusyPeople/main/data/%ED%8A%B8%EB%A0%8C%EB%93%9C_%EC%A0%9C%EB%AA%A9%2B%EB%82%B4%EC%9A%A9.csv")
+# 필터링 옵션 설정
+name = st.sidebar.text_input("Name", "")
+start_date = st.sidebar.date_input("Start Date")
+last_date = st.sidebar.date_input("Last Date")
+num_words = st.sidebar.slider("Number of Words", min_value=5, max_value=50, value=10)
+# 결과 출력
+get_count_top_words(df, start_date=start_date, last_date=last_date, num_words=num_words, name=name)
 
 
 
