@@ -4,11 +4,26 @@ import streamlit as st
 import pandas as pd
 import networkx as nx
 import matplotlib.pyplot as plt
+import ast
+from gensim.models import Word2Vec
 
-import matplotlib.pyplot as plt
-import networkx as nx
-import streamlit as st
+#데이터 전처리
+df = pd.read_csv('https://github.com/seoinhyeok96/BusyPeople/blob/38ff9ba3ab390d829038ce1243acf906bf07a0e3/data/%ED%8A%B8%EB%A0%8C%EB%93%9C_%EC%A0%9C%EB%AA%A9+%EB%82%B4%EC%9A%A9.csv')
 
+#리스트로 바꿔주기
+def to_list(text):
+    return ast.literal_eval(text)
+df['title+content'] = df['title+content'].map(to_list)
+
+def get_words(df, col, keyword):
+    text_list=[]
+    for sublist in df[col]:
+        text_list.append(sublist)
+
+    model = Word2Vec(text_list, vector_size=100, window=5, min_count=1, workers=4, epochs=100)
+    similar_words = model.wv.most_similar(keyword, topn=10)
+    return similar_words
+    
 def main():
     # 폰트 설정
     plt.rc('font', family='NanumGothic')
@@ -20,13 +35,7 @@ def main():
         st.success(f"{keyword}에 대한 연관어 분석 결과입니다")
 
         # Define the data
-        data = [('식물', 'lemon', 8.773420979111814),
-                ('식물', '때싹', 8.166747080757542),
-                ('식물', '호잇', 8.006354458119853),
-                ('식물', '섬광탄', 7.954529050820706),
-                ('식물', '개굴', 7.7866337930292415),
-                ('식물', '빙고', 7.6275987515220764),
-                ('식물', '에스카르고', 7.4945584243029275)]
+        data = get_words(df, 'title+content', keyword)
 
         # Create the network graph
         G = nx.DiGraph()
@@ -51,4 +60,6 @@ def main():
 
 if __name__ == '__main__':
     main()
+
+
 
