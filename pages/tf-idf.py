@@ -8,6 +8,9 @@ from sklearn.feature_extraction.text import CountVectorizer
 
 from wordcloud import WordCloud
 
+font_url = 'https://raw.githubusercontent.com/seoinhyeok96/BusyPeople/main/font/NanumBarunGothic.ttf'
+wget.download(font_url)
+
 
 df = pd.read_csv('https://raw.githubusercontent.com/seoinhyeok96/BusyPeople/main/data/%ED%8A%B8%EB%A0%8C%EB%93%9C_%EC%A0%9C%EB%AA%A9%2B%EB%82%B4%EC%9A%A9.csv')
 df['time'] = pd.to_datetime(df['time'])
@@ -16,7 +19,7 @@ df['time'] = pd.to_datetime(df['time'])
 def plot_wordcloud(words):
     wc = WordCloud(background_color="white", 
                    max_words=1000,
-                   font_path = "AppleGothic", 
+                   font_path = "NanumBarunGothic.ttf", 
                    contour_width=3, 
                    colormap='Spectral', 
                    contour_color='steelblue')
