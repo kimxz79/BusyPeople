@@ -34,7 +34,6 @@ def main():
     keyword = message
     if st.button('분석하기'):
         with st.spinner('분석 중입니다...'):
-            time.sleep(5)
         st.success(f"<{keyword}>에 대한 연관어 분석 결과입니다😀")
 
         # Define the data
@@ -63,6 +62,7 @@ def main():
         st.pyplot()
 
         show_data = st.checkbox('분석 결과 데이터 보기')
+        
         if show_data:
             st.dataframe(df_data)
 
