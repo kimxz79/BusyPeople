@@ -20,7 +20,7 @@ def get_words(df, col, keyword):
     text_list=[]
     for sublist in df[col]:
         text_list.append(sublist)
-    model = Word2Vec(text_list, vector_size=100, window=5, min_count=1, workers=4, epochs=100)
+    model = Word2Vec(text_list, vector_size=100, window=5, min_count=1, workers=3, epochs=50)
     try:
         similar_words = model.wv.most_similar(keyword, topn=10)
         results = [(keyword, word, score) for word, score in similar_words]
