@@ -15,10 +15,11 @@ data = [('식물', 'lemon', 8.773420979111814),
         ('식물', '빙고', 7.6275987515220764),
         ('식물', '에스카르고', 7.4945584243029275)]
 
-ts = TripleStore(font_path='NanumBarunGothic.ttf')
-for row in data:
-    ts.add_triple(*row)
+print(data)
+# ts = TripleStore(font_path='NanumBarunGothic.ttf')
+# for row in data:
+#     ts.add_triple(*row)
 
-# Create the network graph
-st.title('Network Graph')
-agraph(ts)
+# # Create the network graph
+# st.title('Network Graph')
+# agraph(ts)
