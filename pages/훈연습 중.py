@@ -1,3 +1,5 @@
+import warnings
+warnings.filterwarnings("ignore", message="PyplotGlobalUseWarning")
 import streamlit as st
 import pandas as pd
 import networkx as nx
