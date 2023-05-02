@@ -8,4 +8,4 @@ seaborn
 matplotlib
 koreanize-matplotlib
 wordcloud
-sklearn
+scikit-image==0.19.2
