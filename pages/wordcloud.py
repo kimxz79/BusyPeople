@@ -62,8 +62,10 @@ data = go.Scatter(x=[random.random() for i in range(30)],
                  marker={'opacity': 0.3},
                  textfont={'size': weights,
                            'color': colors})
+
 layout = go.Layout({'xaxis': {'showgrid': False, 'showticklabels': False, 'zeroline': False},
                     'yaxis': {'showgrid': False, 'showticklabels': False, 'zeroline': False}})
+
 fig = go.Figure(data=[data], layout=layout)
 
-st.pyplot(fig)
+fig
